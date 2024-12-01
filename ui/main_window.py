@@ -14,6 +14,5 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
-        
     def close_app(self):
         sys.exit()
