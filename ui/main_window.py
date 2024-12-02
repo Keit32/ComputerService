@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QMainWindow, QDialog, QMessageBox, QTableWidgetIte
 from PySide6.QtCore import Signal
 
 from ui.base_ui.ui_main_window import Ui_MainWindow
-from ui.dialogs.add_reference_dialog import AddDialog
+from ui.dialogs.reference_dialog import ReferenceDialog
 
 from config import Messages, RESTRICT_EDIT_LIST
 from models.reference import Reference
@@ -52,9 +52,21 @@ class MainWindow(QMainWindow):
 
         data = self.app.db_manager.get_table_data(self.current_reference.get_data_query)
         if not data:
+            self.ui.selected_reference_table.setRowCount(0)
+            self.ui.selected_reference_table.setColumnCount(0)
             return
 
-        headers = [field["label"] for field in self.current_reference.fields]
+        headers_fields = [field["label"] for field in self.current_reference.fields]
+        
+        try:
+            password_field_index = headers_fields.index('Пароль')
+        except ValueError:
+            password_field_index = None
+        
+        if password_field_index:
+            headers_fields.pop(password_field_index)
+
+        headers = headers_fields
 
         self.ui.selected_reference_table.setRowCount(len(data))
         self.ui.selected_reference_table.setColumnCount(len(headers))
@@ -107,7 +119,7 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "Ошибка", Messages.NOT_ENOUGH_RIGHTS)
             return
 
-        dialog = AddDialog(self.current_reference.fields, "Данные сотрудника")
+        dialog = ReferenceDialog(self.current_reference.fields, self.current_reference.name)
         if dialog.exec() == QDialog.Accepted:
             data = list(dialog.get_data().values())
             if self.app.db_manager.insert_table_data(self.current_reference.insert_data_query, data):
@@ -117,7 +129,21 @@ class MainWindow(QMainWindow):
                 QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_ADD_FAILED.format((self.current_reference.name)))
 
     def edit_reference(self):
-        pass
+        selected_row = self.ui.selected_reference_table.currentRow()
+        if selected_row == -1:
+            return
+        
+        if self.current_reference.name in RESTRICT_EDIT_LIST and not self.app.db_manager.is_admin:
+            QMessageBox.warning(self, "Ошибка", Messages.NOT_ENOUGH_RIGHTS)
+            return
+        
+        current_object = [self.ui.selected_reference_table.item(selected_row, column).text() for column in range(self.ui.selected_reference_table.columnCount())]
+        current_object_id = current_object[0]
+        current_object = current_object[1:]
+
+        dialog = ReferenceDialog(self.current_reference.fields, self.current_reference.name, current_object)
+        if dialog.exec() == QDialog.Accepted:
+            data = list(dialog.get_data().values())
 
     def delete_reference(self):
         selected_row = self.ui.selected_reference_table.currentRow()
@@ -127,8 +153,6 @@ class MainWindow(QMainWindow):
         if self.current_reference.name in RESTRICT_EDIT_LIST and not self.app.db_manager.is_admin:
             QMessageBox.warning(self, "Ошибка", Messages.NOT_ENOUGH_RIGHTS)
             return
-        
-        current_object_id = self.ui.selected_reference_table.item(selected_row, 0).text()
 
         dialog = QMessageBox()
         dialog.setWindowTitle("Подтверждение")

@@ -1,10 +1,10 @@
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QHBoxLayout, QComboBox, QDateEdit
 from PySide6.QtCore import QDate
 
-class AddDialog(QDialog):
-    def __init__(self, fields, title="Введите данные"):
+class ReferenceDialog(QDialog):
+    def __init__(self, fields, name, data=[]):
         super().__init__()
-        self.setWindowTitle(title)
+        self.setWindowTitle(f"Введите данные для объекта справочника \"{name}\"")
         self.fields = fields
         self.inputs = {}
 
@@ -12,11 +12,11 @@ class AddDialog(QDialog):
         self.setLayout(self.layout)
 
         self.form_layout = QFormLayout()
-        for field in self.fields:
+        for index, field in enumerate(self.fields):
             if field["key"] == "id":
                 continue
 
-            widget = self.create_widget(field)
+            widget = self.create_widget(field, data, index-1)
             self.inputs[field["key"]] = widget
             self.form_layout.addRow(field["label"], widget)
 
@@ -33,13 +33,16 @@ class AddDialog(QDialog):
         self.button_layout.addWidget(self.cancel_button)
         self.layout.addLayout(self.button_layout)
 
-    def create_widget(self, field):
+    def create_widget(self, field, data, index):
         field_type = field.get("type")
         match field_type:
             case "lineedit":
                 widget = QLineEdit()
                 if field.get("key") == "password":
                     widget.setEchoMode(QLineEdit.Password)
+                else:
+                    if data:
+                        widget.setText(data[index])
             case "dateedit":
                 widget = QDateEdit()
                 widget.setCalendarPopup(True)

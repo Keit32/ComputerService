@@ -31,6 +31,9 @@ class DBManager:
     def get_table_data(self, query):
         return self.db.execute_query(query, action=QueryAction.FETCHALL)
     
+    def get_table_data_by_id(self, query, id):
+        return self.db.execute_query(query, (id,), action=QueryAction.FETCHONE)
+    
     def insert_table_data(self, query, args):
         return self.db.execute_query(query, args)
     
