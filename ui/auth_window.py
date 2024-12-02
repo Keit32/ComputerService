@@ -4,6 +4,7 @@ from PySide6.QtCore import Signal
 from ui.base_ui.ui_auth_window import Ui_AuthWindow
 
 from config import Messages
+from utils import save_credentials
 
 class AuthWindow(QMainWindow):
     auth_success_signal = Signal(str)
@@ -38,8 +39,7 @@ class AuthWindow(QMainWindow):
         if not result:
             QMessageBox.warning(self, 'Ошибка', Messages.WRONG_EMPLOYEE_PASSWORD)
             return
-
-        # if result:
-        #     if self.ui.radio_button_remember_me.isChecked():
-        #         save_credentials(login, password)
-        #     self.auth_success_signal.emit(result)
+        else:
+            if self.ui.radio_button_remember_me.isChecked():
+                save_credentials(login, password)
+            self.auth_success_signal.emit(result)
