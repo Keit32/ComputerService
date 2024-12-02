@@ -6,7 +6,6 @@ class Reference:
         self.get_data_query = get_data_query
         self.get_data_by_id_query = f"SELECT * FROM {self.sql_table_name} WHERE id = ?"
         self.insert_data_query = insert_data_query
-        self.delete_data_query = f"DELETE FROM {self.sql_table_name} WHERE id = ?;"
 
     def __repr__(self) -> str:
         return self.name

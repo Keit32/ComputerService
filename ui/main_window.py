@@ -20,15 +20,12 @@ class MainWindow(QMainWindow):
         self.references = []
 
         self.current_reference = None
-        self.current_reference_row = None
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
         self.ui.button_log_out.clicked.connect(self.log_out)
         self.ui.add_reference_row_button.clicked.connect(self.add_reference)
-        self.ui.edit_reference_row_button.clicked.connect(self.edit_reference)
-        self.ui.delete_reference_row__button.clicked.connect(self.delete_reference)
         self.ui.references_list.currentItemChanged.connect(lambda: self.load_table(self.ui.selected_reference_table))
 
         self.ui.welcome_employee.setText(f"Добро пожаловать, {self.app.db_manager.user_name}!")
@@ -128,6 +125,7 @@ class MainWindow(QMainWindow):
             else:
                 QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_ADD_FAILED.format((self.current_reference.name)))
 
+<<<<<<< HEAD
     def edit_reference(self):
         selected_row = self.ui.selected_reference_table.currentRow()
         if selected_row == -1:
@@ -168,5 +166,7 @@ class MainWindow(QMainWindow):
             else:
                 QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_DELETE_FAILED)
 
+=======
+>>>>>>> parent of 39eb14a (Completely working delete object from reference)
     def log_out(self):
         self.log_out_signal.emit()
