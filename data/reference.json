@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Сотрудники",
+        "sql_table_name": "employees",
+        "fields": {
+            "id": "ID",
+            "name": "ФИО",
+            "position": "Должность",
+            "gender": "Пол",
+            "birth_date": "Дата рождения",
+            "phone_number": "Номер телефона",
+            "login": "Логин",
+            "password": "Пароль"
+        }
+    },
+    {
+        "name": "Должности",
+        "sql_table_name": "positions",
+        "fields": {
+            "id": "ID",
+            "name": "Наименование"
+        }
+    }
+]

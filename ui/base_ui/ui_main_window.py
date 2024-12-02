@@ -121,6 +121,21 @@ class Ui_MainWindow(object):
         self.references_list = QListWidget(self.references_tab)
         self.references_list.setObjectName(u"references_list")
         self.references_list.setMaximumSize(QSize(300, 16777215))
+        font1 = QFont()
+        font1.setPointSize(14)
+        self.references_list.setFont(font1)
+        self.references_list.setStyleSheet(u"QListWidget::item {\n"
+"	padding: 5px 0;\n"
+"	font-size: 18px;\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+"	background: none;\n"
+"	background-color: rgb(68, 68, 68);\n"
+"}\n"
+"QScrollBar::handle:vertical {\n"
+"	background-color: rgb(85, 85, 85);\n"
+"}")
 
         self.horizontalLayout_2.addWidget(self.references_list)
 
