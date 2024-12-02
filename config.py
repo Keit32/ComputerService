@@ -12,7 +12,6 @@ class Messages:
 
 @dataclass(frozen=True)
 class Queries:
-    GET_ALL_EMPLOYEES_QUERY = "SELECT * FROM employees;"
     FIND_EMPLOYEE = "SELECT id FROM employees WHERE login=?;"
     CHECK_EMPLOYEE_PASSWORD_QUERY = "SELECT id, name FROM employees WHERE login=? AND password = md5(?);"
     ADD_EMPLOYEE_QUERY = "INSERT INTO employees (name, position, gender, birth_date, phone_number, login, password) VALUES (?, ?, ?, ?, ?, ?, md5(?));"
