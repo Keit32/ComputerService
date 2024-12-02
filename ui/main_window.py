@@ -13,3 +13,13 @@ class MainWindow(QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.ui.welcome_employee.setText(f"Добро пожаловать, {self.app.db_manager.user_name}!")
+        if not self.app.db_manager.is_admin:
+            self.remove_administration_tab()
+
+    def remove_administration_tab(self):
+        for index in range(self.ui.tabs.count()):
+            if self.ui.tabs.widget(index) == self.ui.administration_tab:
+                self.ui.tabs.removeTab(index)
+                return

@@ -6,11 +6,24 @@ from ui.main_window import MainWindow
 from ui.auth_window import AuthWindow
 from db_manager import DBManager
 
+from utils import load_credentials, clear_credentials
+
 class App:
     def __init__(self):
         self.app = QApplication()
         self.db_manager = DBManager()
         self.window = None
+
+        credentials = load_credentials()
+        
+        if credentials:
+            result = self.db_manager.check_employee_password(*credentials)
+            if result:
+                self.show_window(MainWindow)
+                return
+            else:
+                clear_credentials()
+        
         self.show_window(AuthWindow, self.setup_auth_window)
 
     def show_window(self, window_class, setup_callback=None):

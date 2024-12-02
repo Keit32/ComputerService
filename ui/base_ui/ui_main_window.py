@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QMainWindow, QSizePolicy, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QMainWindow,
+    QPushButton, QSizePolicy, QSpacerItem, QTabWidget,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -51,14 +52,93 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.welcome_employee = QLabel(self.centralwidget)
+        self.welcome_employee.setObjectName(u"welcome_employee")
+        font = QFont()
+        font.setFamilies([u"Arial"])
+        font.setPointSize(18)
+        font.setBold(True)
+        self.welcome_employee.setFont(font)
+        self.welcome_employee.setStyleSheet(u"")
+        self.welcome_employee.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout.addWidget(self.welcome_employee)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.button_log_out = QPushButton(self.centralwidget)
+        self.button_log_out.setObjectName(u"button_log_out")
+        self.button_log_out.setMinimumSize(QSize(150, 50))
+        self.button_log_out.setMaximumSize(QSize(16777215, 16777215))
+        self.button_log_out.setStyleSheet(u"QPushButton {\n"
+"	background-color: rgba(68, 68, 68, 100);\n"
+"	font-size: 20px;\n"
+"	border: 1px solid #fff;\n"
+"	border-radius: 25px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgba(68, 68, 68, 150);\n"
+"	border-color:  rgba(255, 85, 255, 100);\n"
+"}")
+
+        self.horizontalLayout.addWidget(self.button_log_out)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.tabs = QTabWidget(self.centralwidget)
+        self.tabs.setObjectName(u"tabs")
+        self.tabs.setStyleSheet(u"QWidget {\n"
+"background-color: #333;\n"
+"}\n"
+"\n"
+"QTabBar::tab {\n"
+"  background-color: #333;\n"
+"  padding: 5px;\n"
+"  font-size: 18px;\n"
+"  border: 1px solid #444;\n"
+"}\n"
+"\n"
+"QTabBar::tab:selected {\n"
+"   background-color: #444;\n"
+"}\n"
+"\n"
+"QTabBar::tab:hover {\n"
+"   background-color: #555;\n"
+"}")
+        self.references_tab = QWidget()
+        self.references_tab.setObjectName(u"references_tab")
+        self.tabs.addTab(self.references_tab, "")
+        self.documents_tab = QWidget()
+        self.documents_tab.setObjectName(u"documents_tab")
+        self.tabs.addTab(self.documents_tab, "")
+        self.administration_tab = QWidget()
+        self.administration_tab.setObjectName(u"administration_tab")
+        self.tabs.addTab(self.administration_tab, "")
+
+        self.verticalLayout.addWidget(self.tabs)
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
+
+        self.tabs.setCurrentIndex(2)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440\u043d\u044b\u0439 \u0441\u0435\u0440\u0432\u0438\u0441", None))
+        self.welcome_employee.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0440\u043e \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c, <\u0424\u0418\u041e>!", None))
+        self.button_log_out.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0439\u0442\u0438", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.references_tab), QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a\u0438", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.documents_tab), QCoreApplication.translate("MainWindow", u"\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.administration_tab), QCoreApplication.translate("MainWindow", u"\u0410\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))
     # retranslateUi
 

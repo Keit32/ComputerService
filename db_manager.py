@@ -6,7 +6,8 @@ class DBManager:
     def __init__(self):
         self.db = DBConnection()
         self.user_id = None
-        self.admin = False
+        self.user_name = None
+        self.is_admin = False
 
     def find_employee(self, login):
         user = self.db.execute_query(Queries.FIND_EMPLOYEE, (login,), action=QueryAction.FETCHONE)
@@ -21,8 +22,9 @@ class DBManager:
             return False
         else:
             self.user_id = user[0]
+            self.user_name = user[1]
             if self.user_id == 1:
-                self.admin = True
+                self.is_admin = True
 
             return True
 

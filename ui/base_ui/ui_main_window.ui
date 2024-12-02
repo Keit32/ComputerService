@@ -40,7 +40,122 @@ QMessageBox QPushButton:hover {
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout"/>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="welcome_employee">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>18</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Добро пожаловать, &lt;ФИО&gt;!</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button_log_out">
+        <property name="minimumSize">
+         <size>
+          <width>150</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	background-color: rgba(68, 68, 68, 100);
+	font-size: 20px;
+	border: 1px solid #fff;
+	border-radius: 25px;
+}
+
+QPushButton:hover {
+	background-color: rgba(68, 68, 68, 150);
+	border-color:  rgba(255, 85, 255, 100);
+}</string>
+        </property>
+        <property name="text">
+         <string>Выйти</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabs">
+      <property name="styleSheet">
+       <string notr="true">QWidget {
+background-color: #333;
+}
+
+QTabBar::tab {
+  background-color: #333;
+  padding: 5px;
+  font-size: 18px;
+  border: 1px solid #444;
+}
+
+QTabBar::tab:selected {
+   background-color: #444;
+}
+
+QTabBar::tab:hover {
+   background-color: #555;
+}</string>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="references_tab">
+       <attribute name="title">
+        <string>Справочники</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="documents_tab">
+       <attribute name="title">
+        <string>Документы</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="administration_tab">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Администрирование</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
