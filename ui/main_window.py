@@ -6,7 +6,7 @@ from PySide6.QtCore import Signal
 from ui.base_ui.ui_main_window import Ui_MainWindow
 from ui.dialogs.add_reference_dialog import AddDialog
 
-from config import Messages
+from config import Messages, RESTRICT_EDIT_LIST
 from models.reference import Reference
 
 class MainWindow(QMainWindow):
@@ -98,6 +98,10 @@ class MainWindow(QMainWindow):
 
     def add_reference(self):
         if not self.current_reference:
+            return
+        
+        if self.current_reference.name in RESTRICT_EDIT_LIST and not self.app.db_manager.is_admin:
+            QMessageBox.warning(self, "Ошибка", Messages.NOT_ENOUGH_RIGHTS)
             return
 
         dialog = AddDialog(self.current_reference.fields, "Данные сотрудника")

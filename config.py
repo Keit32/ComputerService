@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 DEFAULT_DB_NAME = "PCService.db"
 
+RESTRICT_EDIT_LIST = ["Сотрудники"]
+
 @dataclass(frozen=True)
 class Messages:
     LOGIN_IS_EMPTY = "Для входа введите логин!"
@@ -11,6 +13,7 @@ class Messages:
     EMPLOYEE_ALREADY_EXISTS = "Сотрудник с данным логином уже существует!"
     REFERENCE_OBJECT_ADDED_SUCCESSFUL = "Новый объект справочника {0} был успешно добавлен!"
     REFERENCE_OBJECT_ADD_FAILED = "Не удалось добавить новый объект справочника {0}!"
+    NOT_ENOUGH_RIGHTS = "Недостаточно прав для данного действия!"
 
 @dataclass(frozen=True)
 class Queries:
