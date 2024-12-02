@@ -20,12 +20,15 @@ class MainWindow(QMainWindow):
         self.references = []
 
         self.current_reference = None
+        self.current_reference_row = None
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
         self.ui.button_log_out.clicked.connect(self.log_out)
         self.ui.add_reference_row_button.clicked.connect(self.add_reference)
+        self.ui.edit_reference_row_button.clicked.connect(self.edit_reference)
+        self.ui.delete_reference_row__button.clicked.connect(self.delete_reference)
         self.ui.references_list.currentItemChanged.connect(lambda: self.load_table(self.ui.selected_reference_table))
 
         self.ui.welcome_employee.setText(f"Добро пожаловать, {self.app.db_manager.user_name}!")
@@ -90,8 +93,9 @@ class MainWindow(QMainWindow):
             reference_sql_table_name = reference_data.get("sql_table_name")
             reference_get_data_query = reference_data.get("get_data_query")
             reference_insert_data_query = reference_data.get("insert_data_query")
+            reference_update_data_query = reference_data.get("update_data_query")
             reference_fields = reference_data.get("fields")
-            self.references.append(Reference(reference_name, reference_sql_table_name, reference_fields, reference_get_data_query, reference_insert_data_query))
+            self.references.append(Reference(reference_name, reference_sql_table_name, reference_fields, reference_get_data_query, reference_insert_data_query, reference_update_data_query))
 
         for reference in self.references:
             for field in reference.fields:
@@ -125,7 +129,6 @@ class MainWindow(QMainWindow):
             else:
                 QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_ADD_FAILED.format((self.current_reference.name)))
 
-<<<<<<< HEAD
     def edit_reference(self):
         selected_row = self.ui.selected_reference_table.currentRow()
         if selected_row == -1:
@@ -135,13 +138,16 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "Ошибка", Messages.NOT_ENOUGH_RIGHTS)
             return
         
-        current_object = [self.ui.selected_reference_table.item(selected_row, column).text() for column in range(self.ui.selected_reference_table.columnCount())]
-        current_object_id = current_object[0]
-        current_object = current_object[1:]
+        current_object_id = int(self.ui.selected_reference_table.item(selected_row, 0).text())
+        current_object = self.app.db_manager.get_table_data_by_id(self.current_reference.get_data_by_id_query, current_object_id)[1:-1]
 
         dialog = ReferenceDialog(self.current_reference.fields, self.current_reference.name, current_object)
         if dialog.exec() == QDialog.Accepted:
             data = list(dialog.get_data().values())
+            if self.app.db_manager.update_table_data(self.current_reference.update_data_query, data):
+                QMessageBox.information(self, "Успешно", Messages.REFERENCE_OBJECT_EDITED_SUCCESSFUL.format((self.current_reference.name)))
+            else:
+                QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_EDIT_FAILED.format((self.current_reference.name)))
 
     def delete_reference(self):
         selected_row = self.ui.selected_reference_table.currentRow()
@@ -151,6 +157,8 @@ class MainWindow(QMainWindow):
         if self.current_reference.name in RESTRICT_EDIT_LIST and not self.app.db_manager.is_admin:
             QMessageBox.warning(self, "Ошибка", Messages.NOT_ENOUGH_RIGHTS)
             return
+        
+        current_object_id = int(self.ui.selected_reference_table.item(selected_row, 0).text())
 
         dialog = QMessageBox()
         dialog.setWindowTitle("Подтверждение")
@@ -161,12 +169,10 @@ class MainWindow(QMainWindow):
         
         if result == QMessageBox.Ok:
             if self.app.db_manager.delete_table_data(self.current_reference.delete_data_query, current_object_id):
-                QMessageBox.information(self, "Успешно", Messages.REFERENCE_OBJECT_DELETED_SUCCESSFUL)
+                QMessageBox.information(self, "Успешно", Messages.REFERENCE_OBJECT_DELETED_SUCCESSFUL.format(self.current_reference.name))
                 self.load_table(self.ui.selected_reference_table)
             else:
-                QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_DELETE_FAILED)
+                QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_DELETE_FAILED.format(self.current_reference.name))
 
-=======
->>>>>>> parent of 39eb14a (Completely working delete object from reference)
     def log_out(self):
         self.log_out_signal.emit()

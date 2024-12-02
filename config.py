@@ -13,6 +13,10 @@ class Messages:
     EMPLOYEE_ALREADY_EXISTS = "Сотрудник с данным логином уже существует!"
     REFERENCE_OBJECT_ADDED_SUCCESSFUL = "Новый объект справочника {0} был успешно добавлен!"
     REFERENCE_OBJECT_ADD_FAILED = "Не удалось добавить новый объект справочника {0}!"
+    REFERENCE_OBJECT_EDITED_SUCCESSFUL = "Объект справочника {0} был успешно изменён!"
+    REFERENCE_OBJECT_EDIT_FAILED = "Не удалось изменить объект справочника {0}!"
+    REFERENCE_OBJECT_DELETED_SUCCESSFUL = "Объект справочника {0} был успешно удалён!"
+    REFERENCE_OBJECT_DELETE_FAILED = "Не удалось удалить объект справочника {0}!"
     NOT_ENOUGH_RIGHTS = "Недостаточно прав для данного действия!"
 
 @dataclass(frozen=True)

@@ -36,3 +36,9 @@ class DBManager:
     
     def insert_table_data(self, query, args):
         return self.db.execute_query(query, args)
+    
+    def update_table_data(self, query, args):
+        return self.db.execute_query(query, args)
+    
+    def delete_table_data(self, query, id):
+        return self.db.execute_query(query, (id,))

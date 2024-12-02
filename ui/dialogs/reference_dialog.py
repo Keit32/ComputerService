@@ -46,12 +46,22 @@ class ReferenceDialog(QDialog):
             case "dateedit":
                 widget = QDateEdit()
                 widget.setCalendarPopup(True)
-                widget.setDate(QDate.currentDate())
+
+                if data:
+                    widget_date = QDate.fromString(data[index].split()[0], "yyyy-MM-dd")
+                else:
+                    widget_date = QDate.currentDate()
+
+                widget.setDate(widget_date)
             case "combobox":
                 widget = QComboBox()
 
                 for option in field.get("options", {}):
-                    widget.addItem(option[1], option[0])      
+                    widget.addItem(option[1], option[0])  
+
+                if data:
+                    index = widget.findData(data[index])
+                    widget.setCurrentIndex(index) 
             case _:
                 raise ValueError(f"Неизвестный тип виджета: {field_type}")
         return widget

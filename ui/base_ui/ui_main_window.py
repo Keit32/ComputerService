@@ -182,10 +182,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.edit_reference_row_button)
 
-        self.pushButton = QPushButton(self.references_tab)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setMinimumSize(QSize(120, 40))
-        self.pushButton.setStyleSheet(u"QPushButton {\n"
+        self.delete_reference_row__button = QPushButton(self.references_tab)
+        self.delete_reference_row__button.setObjectName(u"delete_reference_row__button")
+        self.delete_reference_row__button.setMinimumSize(QSize(120, 40))
+        self.delete_reference_row__button.setStyleSheet(u"QPushButton {\n"
 "	background-color: rgba(68, 68, 68, 100);\n"
 "	font-size: 20px;\n"
 "	border: 1px solid #fff;\n"
@@ -197,11 +197,11 @@ class Ui_MainWindow(object):
 "	border-color:  rgba(255, 85, 255, 100);\n"
 "}")
 
-        self.horizontalLayout_3.addWidget(self.pushButton)
+        self.horizontalLayout_3.addWidget(self.delete_reference_row__button)
 
-        self.delete_reference_row__button = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.spacerr = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_3.addItem(self.delete_reference_row__button)
+        self.horizontalLayout_3.addItem(self.spacerr)
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
@@ -316,7 +316,7 @@ class Ui_MainWindow(object):
         self.button_log_out.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0439\u0442\u0438", None))
         self.add_reference_row_button.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))
         self.edit_reference_row_button.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
+        self.delete_reference_row__button.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
         self.tabs.setTabText(self.tabs.indexOf(self.references_tab), QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a\u0438", None))
         self.tabs.setTabText(self.tabs.indexOf(self.documents_tab), QCoreApplication.translate("MainWindow", u"\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b", None))
         self.tabs.setTabText(self.tabs.indexOf(self.administration_tab), QCoreApplication.translate("MainWindow", u"\u0410\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))

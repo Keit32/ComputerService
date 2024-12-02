@@ -4,6 +4,7 @@
         "sql_table_name": "employees",
         "get_data_query": "SELECT E.id, E.name, P.name, E.gender, E.birth_date, E.phone_number, E.login FROM employees E INNER JOIN positions P ON E.position = P.id;",
         "insert_data_query": "INSERT INTO employees (name, position, gender, birth_date, phone_number, login, password) VALUES (?, ?, ?, ?, ?, ?, md5(?));",
+        "update_data_query": "UPDATE employees name=?, position=?, gender=?, birth_date=?, phone_number=?, login=?, password=?;",
         "fields": [
             {"key": "id", "label": "ID"},
             {"key": "name", "label": "ФИО", "type": "lineedit"},
@@ -20,6 +21,7 @@
         "sql_table_name": "positions",
         "get_data_query": "SELECT id, name FROM positions;",
         "insert_data_query": "INSERT INTO positions (name) VALUES (?);",
+        "update_data_query": "UPDATE positions name=?;",
         "fields": [
             {"key": "id", "label": "ID"},
             {"key": "name", "label": "Наименование", "type": "lineedit"}
@@ -30,6 +32,7 @@
         "sql_table_name": "countries",
         "get_data_query": "SELECT id, name FROM countries;",
         "insert_data_query": "INSERT INTO countries (name) VALUES (?);",
+        "update_data_query": "UPDATE countries name=?;",
         "fields": [
            {"key": "id", "label": "ID"},
            {"key": "name", "label": "Наименование", "type": "lineedit"}
