@@ -255,7 +255,7 @@ QPushButton:hover {
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="delete_reference_row__button">
                 <property name="minimumSize">
                  <size>
                   <width>120</width>
@@ -281,7 +281,7 @@ QPushButton:hover {
                </widget>
               </item>
               <item>
-               <spacer name="delete_reference_row__button">
+               <spacer name="spacerrr">
                 <property name="orientation">
                  <enum>Qt::Orientation::Horizontal</enum>
                 </property>
