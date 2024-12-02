@@ -139,13 +139,15 @@ class MainWindow(QMainWindow):
             return
         
         current_object_id = int(self.ui.selected_reference_table.item(selected_row, 0).text())
-        current_object = self.app.db_manager.get_table_data_by_id(self.current_reference.get_data_by_id_query, current_object_id)[1:-1]
+        current_object = self.app.db_manager.get_table_data_by_id(self.current_reference.get_data_by_id_query, current_object_id)[1:]
 
         dialog = ReferenceDialog(self.current_reference.fields, self.current_reference.name, current_object)
         if dialog.exec() == QDialog.Accepted:
             data = list(dialog.get_data().values())
+            data.append(current_object_id)
             if self.app.db_manager.update_table_data(self.current_reference.update_data_query, data):
                 QMessageBox.information(self, "Успешно", Messages.REFERENCE_OBJECT_EDITED_SUCCESSFUL.format((self.current_reference.name)))
+                self.load_table(self.ui.selected_reference_table)
             else:
                 QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_EDIT_FAILED.format((self.current_reference.name)))
 
