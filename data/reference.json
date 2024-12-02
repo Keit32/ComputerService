@@ -20,5 +20,13 @@
             "id": "ID",
             "name": "Наименование"
         }
+    },
+    {
+        "name": "Страны",
+        "sql_table_name": "countries",
+        "fields": {
+            "id": "ID",
+            "name": "Наименование"
+        }
     }
 ]
