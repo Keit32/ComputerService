@@ -4,6 +4,8 @@ from enum import Enum
 
 from config import DEFAULT_DB_NAME
 
+HASHCODE_NAME = "md5"
+
 class QueryType(Enum):
     SINGLE = 0
     MANY = 1
@@ -28,7 +30,7 @@ class DBConnection:
     def execute_query(self, query, args=(), type=QueryType.SINGLE, action=QueryAction.COMMIT,
                       fetcharg=1):
         self.connect()
-        self.conn.create_function('md5', 1, self.md5sum)
+        self.conn.create_function(HASHCODE_NAME, 1, self.md5sum)
         try:
             match type:
                 case QueryType.SINGLE:
