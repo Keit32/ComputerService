@@ -1,6 +1,6 @@
 import json
 
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QTableWidgetItem, QAbstractItemView
 from PySide6.QtCore import Signal
 
 from models.reference import Reference
@@ -13,12 +13,16 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         self.app = app
+
         self.references = []
+
+        self.selected_reference = None
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
         self.ui.button_log_out.clicked.connect(self.log_out)
+        self.ui.references_list.currentItemChanged.connect(lambda: self.load_table(self.ui.selected_reference_table))
 
         self.ui.welcome_employee.setText(f"Добро пожаловать, {self.app.db_manager.user_name}!")
         if not self.app.db_manager.is_admin:
@@ -33,6 +37,28 @@ class MainWindow(QMainWindow):
                 self.ui.tabs.removeTab(index)
                 return
             
+    def load_table(self, table):
+        for reference in self.references:
+            if reference.name == self.ui.references_list.currentItem().text():
+                current_reference = reference
+                break
+
+        data = self.app.db_manager.get_table_data(current_reference.get_data_query)
+
+        headers = current_reference.fields.values()
+
+        self.ui.selected_reference_table.setRowCount(len(data))
+        self.ui.selected_reference_table.setColumnCount(len(headers))
+        self.ui.selected_reference_table.setHorizontalHeaderLabels(headers)
+
+        for row_idx, row_data in enumerate(data):
+            for col_idx, cell_data in enumerate(row_data):
+                header_item = self.ui.selected_reference_table.horizontalHeaderItem(col_idx).text()
+
+                self.ui.selected_reference_table.setItem(row_idx, col_idx, QTableWidgetItem(str(cell_data)))
+
+        self.ui.selected_reference_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
     def load_data(self):
         self.load_references_data()
 

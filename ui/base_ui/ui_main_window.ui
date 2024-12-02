@@ -296,7 +296,81 @@ QPushButton:hover {
              </layout>
             </item>
             <item>
-             <widget class="QTableWidget" name="selected_reference_table"/>
+             <widget class="QTableWidget" name="selected_reference_table">
+              <property name="styleSheet">
+               <string notr="true">QTableWidget {
+background: none;
+background-color: rgba(100, 100, 100, 50);
+font-size: 16px;
+}
+QTableCornerButton {
+background: none;
+background-color: rgba(100, 100, 100, 50);
+}
+QTableCornerButton::section {
+background: none;
+background-color: rgba(100, 100, 100, 50);
+}
+QHeaderView {
+background: none;
+background-color: rgba(100, 100, 100, 50);
+}
+QHeaderView::section {
+background: none;
+background-color: rgba(100, 100, 100, 50);
+}
+QComboBox {
+background: none;
+background-color: rgba(100, 100, 100, 50);
+border: 1px solid rgba(255, 255, 255, .2);
+color: rgb(255, 255, 255);
+}
+QComboBox:hover {
+border: 1px solid rgba(255, 255, 255, .6);
+}
+QComboBox:focus {
+border: 1px solid rgba(255, 255, 255, .8);
+}
+QComboBox QAbstractItemView {
+    background: transparent;
+	padding: 5px;
+}
+QScrollBar:vertical {
+	background: none;
+	background-color: rgb(68, 68, 68);
+}
+QScrollBar::handle:vertical {
+	background-color: rgb(85, 85, 85);
+}
+QComboBox::drop-down {
+    width:20px;
+    height:20px;
+	border-radius: 10px;
+    subcontrol-position: right top;
+    subcontrol-origin:margin;
+    border: 1px solid rgba(255, 255, 255, .2);
+	background: transparent;
+	image: url(&quot;:/image/arrow-down.png&quot;);
+}
+QComboBox::drop-down:hover {
+    border: 2px solid rgba(255, 255, 255, .6);
+}
+QScrollBar:vertical {
+	background: none;
+	background-color: rgb(68, 68, 68);
+}
+QScrollBar::handle:vertical {
+	background-color: rgb(85, 85, 85);
+}
+QScrollBar:horizontal {
+	background: none;
+	background-color: rgb(68, 68, 68);
+}
+QScrollBar::handle:horizontal {
+	background-color: rgb(85, 85, 85);
+}</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
