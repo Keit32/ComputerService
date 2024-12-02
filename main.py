@@ -19,7 +19,7 @@ class App:
         if credentials:
             result = self.db_manager.check_employee_password(*credentials)
             if result:
-                self.show_window(MainWindow)
+                self.show_window(MainWindow, self.setup_main_window)
                 return
             else:
                 clear_credentials()
@@ -38,7 +38,15 @@ class App:
         self.window.show()
 
     def setup_auth_window(self):
-        self.window.auth_success_signal.connect(lambda: self.show_window(MainWindow))
+        self.window.auth_success_signal.connect(lambda: self.show_window(MainWindow, self.setup_main_window))
+
+    def setup_main_window(self):
+        self.window.log_out_signal.connect(self.log_out)
+
+    def log_out(self):
+        clear_credentials()
+
+        self.show_window(AuthWindow, self.setup_auth_window)
 
     def run(self):
         sys.exit(self.app.exec())
