@@ -1,9 +1,10 @@
 class Reference:
-    def __init__(self, name, sql_table_name, fields):
+    def __init__(self, name, sql_table_name, fields, get_data_query, insert_data_query):
         self.name = name
         self.sql_table_name = sql_table_name
         self.fields = fields
-        self.get_data_query = f"SELECT {', '.join(self.fields.keys())} FROM {sql_table_name};"
+        self.get_data_query = get_data_query
+        self.insert_data_query = insert_data_query
 
     def __repr__(self) -> str:
         return self.name

@@ -30,9 +30,6 @@ class DBManager:
 
     def get_table_data(self, query):
         return self.db.execute_query(query, action=QueryAction.FETCHALL)
-
-    def add_user(self, name, position, gender, birth_date, phone_number, login, password):
-        self.db.execute_query(Queries.ADD_EMPLOYEE_QUERY, (name, position, gender, birth_date, phone_number, login, password))
     
-    def add_position(self, name):
-        self.db.execute_query(Queries.ADD_POSITION_QUERY, (name,))
+    def insert_table_data(self, query, args):
+        return self.db.execute_query(query, args)

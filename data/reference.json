@@ -2,31 +2,37 @@
     {
         "name": "Сотрудники",
         "sql_table_name": "employees",
-        "fields": {
-            "id": "ID",
-            "name": "ФИО",
-            "position": "Должность",
-            "gender": "Пол",
-            "birth_date": "Дата рождения",
-            "phone_number": "Номер телефона",
-            "login": "Логин",
-            "password": "Пароль"
-        }
+        "get_data_query": "SELECT E.id, E.name, P.name, E.gender, E.birth_date, E.phone_number, E.login FROM employees E INNER JOIN positions P ON E.position = P.id;",
+        "insert_data_query": "INSERT INTO employees (name, position, gender, birth_date, phone_number, login, password) VALUES (?, ?, ?, ?, ?, ?, md5(?));",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "ФИО", "type": "lineedit"},
+            {"key": "position", "label": "Должность", "type": "combobox", "options": [], "options_sql_table": "positions"},
+            {"key": "gender", "label": "Пол", "type": "combobox", "options": [["М", "Мужской"], ["Ж", "Женский"]]},
+            {"key": "birth_date", "label": "Дата рождения", "type": "dateedit"},
+            {"key": "phone_number", "label": "Номер телефона", "type": "lineedit"},
+            {"key": "login", "label": "Логин", "type": "lineedit"},
+            {"key": "password", "label": "Пароль", "type": "lineedit"}
+        ]
     },
     {
         "name": "Должности",
         "sql_table_name": "positions",
-        "fields": {
-            "id": "ID",
-            "name": "Наименование"
-        }
+        "get_data_query": "SELECT id, name FROM positions;",
+        "insert_data_query": "INSERT INTO positions (name) VALUES (?);",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "Наименование", "type": "lineedit"}
+        ]
     },
     {
         "name": "Страны",
         "sql_table_name": "countries",
-        "fields": {
-            "id": "ID",
-            "name": "Наименование"
-        }
+        "get_data_query": "SELECT id, name FROM countries;",
+        "insert_data_query": "INSERT INTO countries (name) VALUES (?);",
+        "fields": [
+           {"key": "id", "label": "ID"},
+           {"key": "name", "label": "Наименование", "type": "lineedit"}
+        ]
     }
 ]

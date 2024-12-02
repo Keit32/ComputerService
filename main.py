@@ -45,6 +45,9 @@ class App:
 
     def log_out(self):
         clear_credentials()
+        self.db_manager.user_id = None
+        self.db_manager.user_name = None
+        self.db_manager.is_admin = False
 
         self.show_window(AuthWindow, self.setup_auth_window)
 
