@@ -125,6 +125,7 @@ class MainWindow(QMainWindow):
             data = list(dialog.get_data().values())
             if self.app.db_manager.insert_table_data(self.current_reference.insert_data_query, data):
                 QMessageBox.information(self, "Успешно", Messages.REFERENCE_OBJECT_ADDED_SUCCESSFUL.format((self.current_reference.name)))
+                self.load_data()
                 self.load_table(self.ui.selected_reference_table)
             else:
                 QMessageBox.warning(self, "Ошибка", Messages.REFERENCE_OBJECT_ADD_FAILED.format((self.current_reference.name)))
