@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import QDialog, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QHBoxLayout, QComboBox, QDateEdit
+from PySide6.QtWidgets import QDialog, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QHBoxLayout, QComboBox, QDateEdit, QDateTimeEdit
 from PySide6.QtCore import QDate
 
-class ReferenceDialog(QDialog):
+class ItemDialog(QDialog):
     def __init__(self, fields, name, data=[]):
         super().__init__()
         self.setWindowTitle(f"Введите данные для объекта справочника \"{name}\"")
@@ -53,6 +53,16 @@ class ReferenceDialog(QDialog):
                     widget_date = QDate.currentDate()
 
                 widget.setDate(widget_date)
+            case "datetimeedit":
+                widget = QDateTimeEdit()
+                widget.setCalendarPopup(True)
+
+                if data:
+                    widget_date = QDate.fromString(data[index].split()[0], "yyyy-MM-dd hh:mm:ss")
+                else:
+                    widget_date = QDate.currentDate()
+
+                widget.setDate(widget_date)
             case "combobox":
                 widget = QComboBox()
 
@@ -73,6 +83,8 @@ class ReferenceDialog(QDialog):
                 data[key] = widget.text()
             elif isinstance(widget, QDateEdit):
                 data[key] = widget.date().toString("yyyy-MM-dd") + " 00:00:00"
+            elif isinstance(widget, QDateTimeEdit):
+                data[key] = widget.dateTime().toString("yyyy-MM-dd hh:mm:ss")
             elif isinstance(widget, QComboBox):
                 data[key] = widget.currentData()
         return data

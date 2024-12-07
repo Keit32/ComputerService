@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Записи",
+        "sql_table_name": "records",
+        "get_data_query": "SELECT R.id, R.date, E.name, S.name, C.name, R.status FROM records R INNER JOIN employees E ON R.employee = E.id INNER JOIN services S ON R.service = S.id INNER JOIN clients C ON R.client = C.id;",
+        "insert_data_query": "INSERT INTO records (date, employee, service, client, status) VALUES (?, ?, ?, ?, ?);",
+        "update_data_query": "UPDATE records SET name=?, date=?, employee=?, service=?, client=?, status=? WHERE id = ?;",
+        "fields": [
+           {"key": "id", "label": "ID"},
+           {"key": "date", "label": "Дата", "type": "datetimeedit"},
+           {"key": "employee", "label": "Сотрудник", "type": "combobox", "options": [], "options_sql_table": "employees"},
+           {"key": "service", "label": "Услуга", "type": "combobox", "options": [], "options_sql_table": "services"},
+           {"key": "client", "label": "Клиент", "type": "combobox", "options": [], "options_sql_table": "clients"},
+           {"key": "status", "label": "Статус","type": "combobox", "options": [["Запланировано", "Запланировано"], ["ВПроцессе", "В процессе"], ["Окончено", "Окончено"], ["Отменён", "Отменён"]]}
+        ]
+    }
+]
