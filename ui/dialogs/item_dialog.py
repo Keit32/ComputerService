@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QHBoxLayout, QComboBox, QDateEdit
 from PySide6.QtCore import QDate
 
-class ReferenceDialog(QDialog):
+class ItemDialog(QDialog):
     def __init__(self, fields, name, data=[]):
         super().__init__()
         self.setWindowTitle(f"Введите данные для объекта справочника \"{name}\"")

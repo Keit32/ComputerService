@@ -17,6 +17,12 @@ class Messages:
     REFERENCE_OBJECT_EDIT_FAILED = "Не удалось изменить объект справочника {0}!"
     REFERENCE_OBJECT_DELETED_SUCCESSFUL = "Объект справочника {0} был успешно удалён!"
     REFERENCE_OBJECT_DELETE_FAILED = "Не удалось удалить объект справочника {0}!"
+    DOCUMENT_OBJECT_ADDED_SUCCESSFUL = "Новый объект документа {0} был успешно добавлен!"
+    DOCUMENT_OBJECT_ADD_FAILED = "Не удалось добавить новый объект документа {0}!"
+    DOCUMENT_OBJECT_EDITED_SUCCESSFUL = "Объект документа {0} был успешно изменён!"
+    DOCUMENT_OBJECT_EDIT_FAILED = "Не удалось изменить объект документа {0}!"
+    DOCUMENT_OBJECT_DELETED_SUCCESSFUL = "Объект документа {0} был успешно удалён!"
+    DOCUMENT_OBJECT_DELETE_FAILED = "Не удалось удалить объект документа {0}!"
     NOT_ENOUGH_RIGHTS = "Недостаточно прав для данного действия!"
 
 @dataclass(frozen=True)

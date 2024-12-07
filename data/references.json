@@ -17,6 +17,20 @@
         ]
     },
     {
+        "name": "Клиенты",
+        "sql_table_name": "clients",
+        "get_data_query": "SELECT id, name, birth_date, email, password FROM clients;",
+        "insert_data_query": "INSERT INTO clients (name, birth_date, email, password) VALUES (?, ?, ?, md5(?));",
+        "update_data_query": "UPDATE clients SET name=?, birth_date=?, email=?, password=md5(?) WHERE id = ?;",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "ФИО", "type": "lineedit"},
+            {"key": "birth_date", "label": "Дата рождения", "type": "dateedit"},
+            {"key": "email", "label": "Электронная почта", "type": "lineedit"},
+            {"key": "password", "label": "Пароль", "type": "lineedit"}
+        ]
+    },
+    {
         "name": "Номенклатура",
         "sql_table_name": "nomenclature",
         "get_data_query": "SELECT N.id, N.name, M.name, N.description, MU.name, N.weight, N.price FROM nomenclature N INNER JOIN manufacturers M ON N.manufacturer = M.id INNER JOIN measurement_units MU ON N.measurement_unit = MU.id;",
@@ -35,7 +49,7 @@
     {
         "name": "Услуги",
         "sql_table_name": "services",
-        "get_data_query": "SELECT S.id, S.name, S.price, TMU.name, S.duration FROM services S INNER JOIN time_measurement_units TMU ON S.time_measurement_unit = TMU.name;",
+        "get_data_query": "SELECT S.id, S.name, S.price, TMU.name, S.duration FROM services S INNER JOIN time_measurement_units TMU ON S.time_measurement_unit = TMU.id;",
         "insert_data_query": "INSERT INTO services (name, price, time_measurement_unit, duration) VALUES (?, ?, ?, ?);",
         "update_data_query": "UPDATE services SET name=?, price=?, time_measurement_unit=?, duration=? WHERE id = ?;",
         "fields": [
