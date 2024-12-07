@@ -28,11 +28,17 @@ class DBManager:
 
             return True
 
-    def get_all_users(self):
-        print(self.db.execute_query(Queries.GET_ALL_EMPLOYEES_QUERY, action=QueryAction.FETCHALL))
-
-    def add_user(self, name, position, gender, birth_date, phone_number, login, password):
-        self.db.execute_query(Queries.ADD_EMPLOYEE_QUERY, (name, position, gender, birth_date, phone_number, login, password))
+    def get_table_data(self, query):
+        return self.db.execute_query(query, action=QueryAction.FETCHALL)
     
-    def add_position(self, name):
-        self.db.execute_query(Queries.ADD_POSITION_QUERY, (name,))
+    def get_table_data_by_id(self, query, id):
+        return self.db.execute_query(query, (id,), action=QueryAction.FETCHONE)
+    
+    def insert_table_data(self, query, args):
+        return self.db.execute_query(query, args)
+    
+    def update_table_data(self, query, args):
+        return self.db.execute_query(query, args)
+    
+    def delete_table_data(self, query, id):
+        return self.db.execute_query(query, (id,))
