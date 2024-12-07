@@ -1,0 +1,119 @@
+[
+    {
+        "name": "Сотрудники",
+        "sql_table_name": "employees",
+        "get_data_query": "SELECT E.id, E.name, P.name, E.gender, E.birth_date, E.phone_number, E.login FROM employees E INNER JOIN positions P ON E.position = P.id;",
+        "insert_data_query": "INSERT INTO employees (name, position, gender, birth_date, phone_number, login, password) VALUES (?, ?, ?, ?, ?, ?, md5(?));",
+        "update_data_query": "UPDATE employees SET name=?, position=?, gender=?, birth_date=?, phone_number=?, login=?, password=md5(?) WHERE id = ?;",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "ФИО", "type": "lineedit"},
+            {"key": "position", "label": "Должность", "type": "combobox", "options": [], "options_sql_table": "positions"},
+            {"key": "gender", "label": "Пол", "type": "combobox", "options": [["М", "Мужской"], ["Ж", "Женский"]]},
+            {"key": "birth_date", "label": "Дата рождения", "type": "dateedit"},
+            {"key": "phone_number", "label": "Номер телефона", "type": "lineedit"},
+            {"key": "login", "label": "Логин", "type": "lineedit"},
+            {"key": "password", "label": "Пароль", "type": "lineedit"}
+        ]
+    },
+    {
+        "name": "Клиенты",
+        "sql_table_name": "clients",
+        "get_data_query": "SELECT id, name, birth_date, email FROM clients;",
+        "insert_data_query": "INSERT INTO clients (name, birth_date, email, password) VALUES (?, ?, ?, md5(?));",
+        "update_data_query": "UPDATE clients SET name=?, birth_date=?, email=?, password=md5(?) WHERE id = ?;",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "ФИО", "type": "lineedit"},
+            {"key": "birth_date", "label": "Дата рождения", "type": "dateedit"},
+            {"key": "email", "label": "Электронная почта", "type": "lineedit"},
+            {"key": "password", "label": "Пароль", "type": "lineedit"}
+        ]
+    },
+    {
+        "name": "Номенклатура",
+        "sql_table_name": "nomenclature",
+        "get_data_query": "SELECT N.id, N.name, M.name, N.description, MU.name, N.weight, N.price FROM nomenclature N INNER JOIN manufacturers M ON N.manufacturer = M.id INNER JOIN measurement_units MU ON N.measurement_unit = MU.id;",
+        "insert_data_query": "INSERT INTO nomenclature (name, manufacturer, description, measurement_unit, weight, price) VALUES (?, ?, ?, ?, ?, ?);",
+        "update_data_query": "UPDATE nomenclature SET name=?, manufacturer=?, description=?, measurement_unit=?, weight=?, price=? WHERE id = ?;",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "Наименование", "type": "lineedit"},
+            {"key": "manufacturer", "label": "Производитель", "type": "combobox", "options": [], "options_sql_table": "manufacturers"},
+            {"key": "description", "label": "Описание", "type": "lineedit"},
+            {"key": "measurement_unit", "label": "Ед. изм.", "type": "combobox", "options": [], "options_sql_table": "measurement_units"},
+            {"key": "weight", "label": "Вес", "type": "lineedit"},
+            {"key": "price", "label": "Цена", "type": "lineedit"}
+        ]
+    },
+    {
+        "name": "Услуги",
+        "sql_table_name": "services",
+        "get_data_query": "SELECT S.id, S.name, S.price, TMU.name, S.duration FROM services S INNER JOIN time_measurement_units TMU ON S.time_measurement_unit = TMU.id;",
+        "insert_data_query": "INSERT INTO services (name, price, time_measurement_unit, duration) VALUES (?, ?, ?, ?);",
+        "update_data_query": "UPDATE services SET name=?, price=?, time_measurement_unit=?, duration=? WHERE id = ?;",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "Наименование", "type": "lineedit"},
+            {"key": "price", "label": "Цена", "type": "lineedit"},
+            {"key": "time_measurement_unit", "label": "Ед. изм. времени", "type": "combobox", "options": [], "options_sql_table": "time_measurement_units"},
+            {"key": "duration", "label": "Длительность", "type": "lineedit"}
+        ]
+    },
+    {
+        "name": "Должности",
+        "sql_table_name": "positions",
+        "get_data_query": "SELECT id, name FROM positions;",
+        "insert_data_query": "INSERT INTO positions (name) VALUES (?);",
+        "update_data_query": "UPDATE positions SET name=? WHERE id = ?;",
+        "fields": [
+            {"key": "id", "label": "ID"},
+            {"key": "name", "label": "Наименование", "type": "lineedit"}
+        ]
+    },
+    {
+        "name": "Производители",
+        "sql_table_name": "manufacturers",
+        "get_data_query": "SELECT M.id, M.name, C.name FROM manufacturers M INNER JOIN countries C ON M.country = C.id;",
+        "insert_data_query": "INSERT INTO manufacturers (name, country) VALUES (?, ?);",
+        "update_data_query": "UPDATE manufacturers SET name=?, country=? WHERE id = ?;",
+        "fields": [
+           {"key": "id", "label": "ID"},
+           {"key": "name", "label": "Наименование", "type": "lineedit"},
+           {"key": "country", "label": "Страна", "type": "combobox", "options": [], "options_sql_table": "countries"}
+        ]
+    },
+    {
+        "name": "Единицы измерения",
+        "sql_table_name": "measurement_units",
+        "get_data_query": "SELECT id, name FROM measurement_units;",
+        "insert_data_query": "INSERT INTO measurement_units (name) VALUES (?);",
+        "update_data_query": "UPDATE measurement_units SET name=? WHERE id = ?;",
+        "fields": [
+           {"key": "id", "label": "ID"},
+           {"key": "name", "label": "Наименование", "type": "lineedit"}
+        ]
+    },
+    {
+        "name": "Единицы измерения времени",
+        "sql_table_name": "time_measurement_units",
+        "get_data_query": "SELECT id, name FROM time_measurement_units;",
+        "insert_data_query": "INSERT INTO time_measurement_units (name) VALUES (?);",
+        "update_data_query": "UPDATE time_measurement_units SET name=? WHERE id = ?;",
+        "fields": [
+           {"key": "id", "label": "ID"},
+           {"key": "name", "label": "Наименование", "type": "lineedit"}
+        ]
+    },
+    {
+        "name": "Страны",
+        "sql_table_name": "countries",
+        "get_data_query": "SELECT id, name FROM countries;",
+        "insert_data_query": "INSERT INTO countries (name) VALUES (?);",
+        "update_data_query": "UPDATE countries SET name=? WHERE id = ?;",
+        "fields": [
+           {"key": "id", "label": "ID"},
+           {"key": "name", "label": "Наименование", "type": "lineedit"}
+        ]
+    }
+]
