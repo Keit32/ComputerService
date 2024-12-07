@@ -234,11 +234,11 @@ class MainWindow(QMainWindow):
         if dialog.exec() == QDialog.Accepted:
             data = list(dialog.get_data().values())
             if self.app.db_manager.insert_table_data(self.current_document.insert_data_query, data):
-                QMessageBox.information(self, "Успешно", Messages.DOCUMENT_OBJECT_ADDED_SUCCESSFUL.format((self.current_reference.name)))
+                QMessageBox.information(self, "Успешно", Messages.DOCUMENT_OBJECT_ADDED_SUCCESSFUL.format((self.current_document.name)))
                 self.load_data()
                 self.load_table(self.ui.selected_document_table)
             else:
-                QMessageBox.warning(self, "Ошибка", Messages.DOCUMENT_OBJECT_ADD_FAILED.format((self.current_reference.name)))
+                QMessageBox.warning(self, "Ошибка", Messages.DOCUMENT_OBJECT_ADD_FAILED.format((self.current_document.name)))
 
     def edit_document(self):
         selected_row = self.ui.selected_document_table.currentRow()
@@ -258,7 +258,7 @@ class MainWindow(QMainWindow):
             data.append(current_object_id)
             if self.app.db_manager.update_table_data(self.current_document.update_data_query, data):
                 QMessageBox.information(self, "Успешно", Messages.DOCUMENT_OBJECT_EDITED_SUCCESSFUL.format((self.current_document.name)))
-                self.load_table(self.ui.selected_reference_table)
+                self.load_table(self.ui.selected_document_table)
             else:
                 QMessageBox.warning(self, "Ошибка", Messages.DOCUMENT_OBJECT_EDIT_FAILED.format((self.current_document.name)))
 
@@ -283,7 +283,7 @@ class MainWindow(QMainWindow):
         if result == QMessageBox.Ok:
             if self.app.db_manager.delete_table_data(self.current_document.delete_data_query, current_object_id):
                 QMessageBox.information(self, "Успешно", Messages.DOCUMENT_OBJECT_DELETED_SUCCESSFUL.format(self.current_document.name))
-                self.load_table(self.ui.selected_reference_table)
+                self.load_table(self.ui.selected_document_table)
             else:
                 QMessageBox.warning(self, "Ошибка", Messages.DOCUMENT_OBJECT_DELETE_FAILED.format(self.current_document.name))
 

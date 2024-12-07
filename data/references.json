@@ -19,7 +19,7 @@
     {
         "name": "Клиенты",
         "sql_table_name": "clients",
-        "get_data_query": "SELECT id, name, birth_date, email, password FROM clients;",
+        "get_data_query": "SELECT id, name, birth_date, email FROM clients;",
         "insert_data_query": "INSERT INTO clients (name, birth_date, email, password) VALUES (?, ?, ?, md5(?));",
         "update_data_query": "UPDATE clients SET name=?, birth_date=?, email=?, password=md5(?) WHERE id = ?;",
         "fields": [
