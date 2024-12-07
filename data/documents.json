@@ -11,7 +11,7 @@
            {"key": "employee", "label": "Сотрудник", "type": "combobox", "options": [], "options_sql_table": "employees"},
            {"key": "service", "label": "Услуга", "type": "combobox", "options": [], "options_sql_table": "services"},
            {"key": "client", "label": "Клиент", "type": "combobox", "options": [], "options_sql_table": "clients"},
-           {"key": "status", "label": "Статус","type": "lineedit", "options": [["Запланировано", "Запланировано"], ["ВПроцессе", "В процессе"], ["Окончено", "Окончено"], ["Отменён", "Отменён"]]}
+           {"key": "status", "label": "Статус","type": "combobox", "options": [["Запланировано", "Запланировано"], ["ВПроцессе", "В процессе"], ["Окончено", "Окончено"], ["Отменён", "Отменён"]]}
         ]
     }
 ]
