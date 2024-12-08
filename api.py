@@ -44,10 +44,12 @@ def get_data():
 
 @app.post("/login_client")
 def login_client(login_request: LoginRequest):
-    user = db_manager.get_table_data(Queries.LOGIN_CLIENT, (login_request.email,))[0]
+    user = db_manager.get_table_data(Queries.LOGIN_CLIENT, (login_request.email,))
 
     if not user:
         raise HTTPException(status_code=404, detail="Пользователь с данной электронной почтой не зарегистрирован!")
+    else:
+        user = user[0]
     
     if user["password"] != hash_password(login_request.password):
         raise HTTPException(status_code=401, detail="Введён неверный пароль!")
@@ -60,6 +62,8 @@ def register_client(register_request: RegisterRequest):
 
     if user:
         raise HTTPException(status_code=400, detail="Пользователь с данной электронной почтой уже существует!")
+    else:
+        user = user[0]
     
     date_obj = datetime.fromisoformat(register_request.birth_date)
     formatted_date = date_obj.strftime("%Y-%m-%d %H:%M:%S")
