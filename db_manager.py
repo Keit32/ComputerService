@@ -9,6 +9,8 @@ class DBManager:
         self.user_name = None
         self.is_admin = False
 
+    # region Main app DB commands
+
     def find_employee(self, login):
         user = self.db.execute_query(Queries.FIND_EMPLOYEE, (login,), action=QueryAction.FETCHONE)
         if not user:
@@ -42,3 +44,9 @@ class DBManager:
     
     def delete_table_data(self, query, id):
         return self.db.execute_query(query, (id,))
+    
+    # endregion
+
+    # region Api DB commands 
+
+    # endregion
