@@ -29,3 +29,5 @@ class Messages:
 class Queries:
     FIND_EMPLOYEE = "SELECT id FROM employees WHERE login=?;"
     CHECK_EMPLOYEE_PASSWORD_QUERY = "SELECT id, name FROM employees WHERE login=? AND password = md5(?);"
+    LOGIN_CLIENT = "SELECT id, name, password FROM clients WHERE email=?"
+    ADD_CLIENT = "INSERT INTO clients (name, birth_date, email, password) VALUES (?, ?, ?, ?)"
