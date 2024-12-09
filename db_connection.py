@@ -62,6 +62,7 @@ class DBConnection:
         try:
             if self.conn is None:
                 self.conn = sqlite3.connect(DEFAULT_DB_NAME)
+                self.conn.row_factory = sqlite3.Row
                 self.cursor = self.conn.cursor()
         except Exception as e:
             print(e)
