@@ -28,8 +28,8 @@ class DBManager:
 
             return True
 
-    def get_table_data(self, query):
-        return self.db.execute_query(query, action=QueryAction.FETCHALL)
+    def get_table_data(self, query, args=()):
+        return self.db.execute_query(query, action=QueryAction.FETCHALL, args=args)
     
     def get_table_data_by_id(self, query, id):
         return self.db.execute_query(query, (id,), action=QueryAction.FETCHONE)
