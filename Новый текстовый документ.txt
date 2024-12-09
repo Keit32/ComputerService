@@ -1,4 +1,0 @@
-@echo off
-echo Starting ComputerService FastAPI server...
-uvicorn main:app --reload
-pause
