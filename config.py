@@ -31,4 +31,4 @@ class Queries:
     CHECK_EMPLOYEE_PASSWORD_QUERY = "SELECT id, name FROM employees WHERE login=? AND password = md5(?);"
     LOGIN_CLIENT = "SELECT id, name, password FROM clients WHERE email=?"
     ADD_CLIENT = "INSERT INTO clients (name, birth_date, email, password) VALUES (?, ?, ?, ?)"
-    ADD_RECORD = "INSERT INTO record (date, employee, service, client, status) VALUES (?, ?, ?, ?, ?)"
+    ADD_RECORD = "INSERT INTO records (date, employee, service, client, status) VALUES (?, ?, ?, ?, ?)"
